@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Настройки</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/font-awesome.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/templatemo-style.css">
+        <script src="/static/js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="responsive-header visible-xs visible-sm">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="top-section">
+                            <div class="profile-image">
+                                <img src="/static/img/profile.jpg" alt="Volton">
+                            </div>
+                            <div class="profile-content">
+                                <h3 class="profile-title">{{username}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="toggle-menu"><i class="fa fa-bars"></i></a>
+                <div class="main-navigation responsive-menu">
+                    <ul class="navigation">
+                      <div onclick=onclick="location.href='/feed';"><li><a href="/feed"><i class="fa fa-globe"></i>Лента</a></li></div>
+                      <div onclick="location.href='/settings';"><li><a href="settings"><i class="fa fa-cog"></i>Настройки</a></li></div>
+                      <div onclick="location.href='/new_src';"><li><a href="/new_src"><i class="fa fa-plus"></i>Новый источник</a></li></div>
+                      <div onclick="location.href='/logout';"><li><a href="/logout"><i class="fa fa-sign-out"></i>Выход</a></li></div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar-menu hidden-xs hidden-sm">
+            <div class="top-section">
+                <div class="profile-image">
+                    <img src="/static/img/profile.jpg" alt="Volton">
+                </div>
+                <h3 class="profile-title">{{username}}</h3>
+            </div> <!-- top-section -->
+            <div class="main-navigation">
+                <ul class="navigation">
+                  <div onclick=onclick="location.href='/feed';"><li><a href="/feed"><i class="fa fa-globe"></i>Лента</a></li></div>
+                  <div onclick="location.href='/settings';"><li><a href="settings"><i class="fa fa-cog"></i>Настройки</a></li></div>
+                  <div onclick="location.href='/new_src';"><li><a href="/new_src"><i class="fa fa-plus"></i>Новый источник</a></li></div>
+                  <div onclick="location.href='/logout';"><li><a href="/logout"><i class="fa fa-sign-out"></i>Выход</a></li></div>            </ul>
+            </div> <!-- .main-navigation -->
+        </div> <!-- .sidebar-menu -->
+
+
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="fluid-container">
+                <div class="content-wrapper">
+
+                <div class="row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
+                  <form action="/set_src">
+                   {% for source in sources %}
+                    {% if source in tags %}
+                   <p><input type="checkbox" name="rss{{source}}" value="{{source}}" checked> {{source}}</p>
+                   {% else %}
+                   <p><input type="checkbox" name="rss{{source}}" value="{{source}}"> {{source}}</p>
+                  {% endif %}
+                   {% endfor %}
+                   <p><input type="submit"></p>
+                 </form>
+                 </div>
+                </div>
+
+                    <div class="row" id="footer">
+                        <div class="col-md-12 text-center">
+                            <p class="copyright-text">Copyright &copy; 2018 Nikita Oskotskii</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <script src="/static/js/vendor/jquery-1.10.2.min.js"></script>
+        <script src="/static/js/min/plugins.min.js"></script>
+        <script src="/static/js/min/main.min.js"></script>
+
+    </body>
+</html>
