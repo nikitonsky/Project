@@ -89,6 +89,8 @@ class Database:
             return 'Error'
     def get_rss(self):
         return cur.execute('select name from rss').fetchall()
+    def get_rss_url(self):
+        return cur.execute('select url from rss').fetchall()
     def set_sources(self, token, sources):
         login = list(cur.execute('select login from tokens where token=\'{token}\''.format(token = token)).fetchall())[0][0]
         cur.execute('''update logins set tags = \'{sources}\' where login=\'{login}\''''.format(login=login, sources=sources))

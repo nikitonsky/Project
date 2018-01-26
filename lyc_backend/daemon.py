@@ -7,13 +7,14 @@ def create(rss):
     for post in rss.entries:
         if base.check_post_by_url(post.link)==True:
             continue
+        print(post.title)
         base.add_post(rss.feed.title.replace('\'', '\'\''), post.published, post.title.replace('\'', '\'\''), post.summary.replace('\'', '\'\''), post.link)
 
 base = database.Database()
 
 def run():
     while True:
-        for stream in base.get_rss():
+        for stream in base.get_rss_url():
             rss=feedparser.parse(stream[0])
             create(rss)
         #print('WAIT')
