@@ -66,6 +66,15 @@ def add_src(src):
         return 'Error'
     return data.add_src(src,rss.feed.title)
 
+@app.route('/add_post', methods=['POST'])
+def add_post():
+    url = request.data.get('url')
+    source = request.data.get('src')
+    date = request.data.get('date')
+    short = request.data.get('short')
+    name = request.data.get('title')
+    data.add_post(source, date, name, short, url)
+
 @app.route('/get_tags/<token>')
 def get_tags(token):
     return data.get_tags(token)

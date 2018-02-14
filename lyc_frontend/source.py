@@ -14,7 +14,7 @@ if DEBUG:
 @app.route('/')
 def root():
     try:
-        username = request.cookies.get['token']
+        username = request.cookies['token']
         return redirect(url_for('feed'))
     except:
         return redirect(url_for('login'))
