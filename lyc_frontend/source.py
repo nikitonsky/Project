@@ -4,7 +4,7 @@ import requests
 app = Flask('frontend')
 DEBUG = True
 
-api = 'https://nikitonsky.tk/'
+api = 'https://api.nikitonsky.tk/'
 
 if DEBUG:
     api = 'http://127.0.0.1:55556/'
@@ -46,7 +46,6 @@ def feed():
     return render_template('index.html', posts = posts, username=username, begin = begin, cnt  =len(posts))
 
 
-
 @app.route('/auth')
 def auth():
     login = request.args.get('login', '')
@@ -75,7 +74,20 @@ def login():
     lerror = request.args.get('lerror', '')
     if lerror==None:
         lerror=''
+    return render_template('auth1.html', rerror=rerror, lerror=lerror)
+
+
+@app.route('/register')
+def register():
+    rerror = request.args.get('rerror', '')
+    if rerror==None:
+        rerror=''
+    lerror = request.args.get('lerror', '')
+    if lerror==None:
+        lerror=''
     return render_template('auth.html', rerror=rerror, lerror=lerror)
+
+
 
 @app.route('/registration')
 def registration():
@@ -89,14 +101,14 @@ def registration():
     pass2 = request.args.get('pass1', '')
     email = request.args.get('email', '')
     if pass1 != pass2:
-        return redirect(url_for('login', rerror='Пароли не совпадают'))
+        return redirect(url_for('register', rerror='Пароли не совпадают'))
     resp = requests.get(api+'register/' + login+'/'+pass1+'/'+name+'/'+email).text.split('\n')
     if resp[0]=='OK':
         return redirect(url_for('login'))
     elif resp[1]=='Login':
-        return  redirect(url_for('login', rerror='Такой логин занят'))
+        return  redirect(url_for('register', rerror='Такой логин занят'))
     else:
-        return  redirect(url_for('login', rerror='Такая почта уже используется'))
+        return  redirect(url_for('register', rerror='Такая почта уже используется'))
 
 @app.route('/add')
 def add():
